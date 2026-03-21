@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  
+  --color-primary-lavender: #9489C0;
+  --color-deep-indigo: #3B2D7E;
+  --color-accent-red: #FF4D4D;
+  --color-soft-bg: #F9F9FB;
+}
+
+@layer base {
+  body {
+    @apply text-deep-indigo font-sans antialiased bg-white;
+    background-image: url('/backgraun.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+
+@utility btn-lavender {
+  @apply bg-primary-lavender text-white px-8 py-3 rounded-full font-medium transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-primary-lavender/20;
+}
+
+@utility card-hover {
+  @apply transition-all duration-500 hover:shadow-2xl hover:shadow-primary-lavender/20 hover:-translate-y-2 border border-transparent hover:border-primary-lavender/10;
+}
+
+@utility section-title {
+  @apply font-serif text-4xl md:text-5xl uppercase tracking-[0.2em] text-deep-indigo mb-12 text-center;
+}
+
+.watercolor-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.6;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle at 0% 0%, #E6E1F5 0%, transparent 50%),
+    radial-gradient(circle at 100% 100%, #F0E6FF 0%, transparent 50%);
+}
