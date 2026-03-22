@@ -38,7 +38,7 @@ all_products = [
 def get_product_by_id(product_id):
     return next((p for p in all_products if p['id'] == product_id), None)
 
-favorite_products_ids = [6, 4, 5] # Si Passione, Flora Gorgeous Jasmine, Eros Pour Femme
+favorite_products_ids = [6, 4, 8]
 
 def process_products_for_template(products):
     """Calculates original_price for products on sale."""
