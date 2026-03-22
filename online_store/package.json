@@ -1,0 +1,12 @@
+{
+  "name": "amevia-parfum",
+  "version": "1.0.0",
+  "description": "AMEVIA Parfum Online Store",
+  "private": true,
+  "scripts": {
+    "build": "echo 'No build step required for Flask app'"
+  },
+  "dependencies": {
+    "@vercel/speed-insights": "^1.1.0"
+  }
+}
