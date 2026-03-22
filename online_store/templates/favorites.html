@@ -1,0 +1,67 @@
+{% extends base_template %}
+
+{% block content %}
+<main class="flex-grow">
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+
+            <!-- Back to Home link -->
+            <div class="mb-8">
+                <a href="/" class="inline-flex items-center text-sm text-primary-lavender hover:text-deep-indigo transition-colors group">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1"></i>
+                    Повернутися на головну
+                </a>
+            </div>
+
+            <div class="text-center mb-12">
+                <h1 class="font-serif text-5xl md:text-6xl text-deep-indigo mb-4">Обране</h1>
+                <p class="text-primary-lavender text-lg max-w-2xl mx-auto">Товари, які ви додали до свого списку бажань. Не втрачайте їх з поля зору!</p>
+            </div>
+
+            {% if favorite_products %}
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for p in favorite_products %}
+                <div class="flex flex-col group cursor-pointer bg-white/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/60 shadow-sm hover:shadow-2xl hover:shadow-primary-lavender/20 transition-all duration-500 hover:-translate-y-2 hover:border-primary-lavender/10 relative">
+                     <!-- Remove from favorites button -->
+                    <button class="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full text-accent-red hover:bg-white shadow-sm z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                    </button>
+
+                    <div class="relative w-full aspect-square overflow-hidden">
+                        <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                        <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 hidden md:block bg-gradient-to-t from-white/60 to-transparent backdrop-blur-[2px]">
+                            <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg shadow-deep-indigo/20 hover:bg-primary-lavender transition-colors">До кошика</button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="text-center w-full">
+                            <div class="text-[8px] uppercase tracking-[0.2em] text-primary-lavender font-bold mb-1">{{ p.brand }}</div>
+                            <h3 class="font-serif text-base text-deep-indigo mb-1 line-clamp-1 group-hover:text-primary-lavender transition-colors">{{ p.name }}</h3>
+                            <div class="flex items-center justify-center gap-2 mt-2">
+                                <span class="text-sm font-bold text-deep-indigo">{{ p.price }} ₴</span>
+                                {% if p.sale %}
+                                <span class="text-[10px] text-gray-400 line-through font-light">{{ p.original_price }} ₴</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mt-4 w-full md:hidden">
+                            <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg active:scale-95 transition-transform">До кошика</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-16 px-4 bg-white/40 backdrop-blur-sm rounded-2xl border border-white/60 shadow-sm">
+                <i data-lucide="heart" class="w-16 h-16 mx-auto text-primary-lavender/50 mb-6"></i>
+                <h2 class="font-serif text-2xl text-deep-indigo mb-2">Ваш список обраного порожній</h2>
+                <p class="text-gray-500 mb-8 max-w-sm mx-auto">Здається, ви ще не додали жодного товару. Почніть перегляд нашого каталогу!</p>
+                <a href="/" class="bg-primary-lavender text-white px-10 py-3 rounded-full text-sm uppercase tracking-widest font-medium transition-all hover:opacity-90 active:scale-95 shadow-lg shadow-primary-lavender/20">
+                    Перейти до каталогу
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}

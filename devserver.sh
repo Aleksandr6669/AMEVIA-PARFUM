@@ -1,3 +1,4 @@
 #!/bin/sh
 source .venv/bin/activate
-python -u -m flask --app main run -p $PORT --debug
+# Directly run the python script
+python -u online_store/main.py

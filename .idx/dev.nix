@@ -23,7 +23,7 @@
       previews = {
         web = {
           command = [ "./devserver.sh" ];
-          env = { PORT = "$PORT"; };
+          env = { PORT = "$PORT"; }; 
           manager = "web";
         };
       };
