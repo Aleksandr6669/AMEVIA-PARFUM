@@ -39,7 +39,7 @@
                     </button>
 
                     <div class="relative w-full aspect-square overflow-hidden">
-                        <imgg src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                        <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
                         <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 hidden md:block bg-gradient-to-t from-white/60 to-transparent backdrop-blur-[2px]">
                             <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg shadow-deep-indigo/20 hover:bg-primary-lavender transition-colors">До кошика</button>
                         </div>
