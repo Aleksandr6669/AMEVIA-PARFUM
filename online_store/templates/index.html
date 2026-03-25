@@ -1,5 +1,15 @@
 {% extends base_template %}
 
+{% block open_graph %}
+<meta name="description" content="Відкрийте світ унікальних ароматів в AMEVIA. У нас ви знайдете нішеву парфумерію, ексклюзивні новинки, вигідні акції та відгуки покупців. Швидка доставка по Україні.">
+<meta property="og:title" content="AMEVIA - Головна сторінка">
+<meta property="og:description" content="Нішева парфумерія, ексклюзивні новинки та вигідні акції. Відкрийте світ унікальних ароматів в AMEVIA.">
+<meta property="og:image" content="{{ request.url_root[:-1] }}{{ url_for('static', filename='logo.png') }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="AMEVIA">
+{% endblock %}
+
 {% block content %}
 <!-- Hero -->
 <section class="py-20 px-4 text-center bg-transparent">
