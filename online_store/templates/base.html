@@ -150,11 +150,11 @@
         </header>
 
         <!-- Mobile Menu (Hidden by default) -->
-        <div id="mobile-menu" class="md:hidden fixed inset-0 z-60 pointer-events-none">
+        <div id="mobile-menu" class="md:hidden fixed inset-0 z-[9999] pointer-events-none">
             <!-- Overlay -->
             <div id="mobile-menu-overlay" class="fixed inset-0 backdrop-blur-sm opacity-0 transition-opacity duration-300 ease-in-out"></div>
             <!-- Menu content -->
-            <div id="mobile-menu-panel" class="relative z-50 bg-white/20 backdrop-blur-2xl h-full w-full px-8 pt-8 pb-24 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+            <div id="mobile-menu-panel" class="relative  bg-white/20 backdrop-blur-2xl h-full w-full px-8 pt-8 pb-4 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
                 <div>
                     <button id="mobile-menu-close-button" class="absolute top-4 right-4 p-2 text-deep-indigo hover:text-primary-lavender transition-all duration-500 ease-in-out delay-300 opacity-0 transform -rotate-90">
                         <i data-lucide="x" class="w-6 h-6"></i>
@@ -175,8 +175,9 @@
                         <a href="#" class="font-sans text-lg font-medium text-deep-indigo transition-colors hover:text-primary-lavender">Відгуки</a>
                         <a href="#" class="font-sans text-lg font-medium text-accent-red transition-colors hover:text-primary-lavender">Акції</a>
                     </nav>
+                    
                 </div>
-                <div class="text-center">
+                <div class="text-center mb-0">
                     <div class="w-40 h-14 mx-auto overflow-hidden flex justify-center items-center">
                         <img src="{{ url_for('static', filename='logo.png') }}" alt="AMEVIA Logo" class="h-full scale-[2.5] opacity-50" referrerpolicy="no-referrer">
                     </div>
