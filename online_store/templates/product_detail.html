@@ -1,5 +1,14 @@
 {% extends base_template %}
 
+{% block open_graph %}
+<meta property="og:title" content="{{ product.name }}">
+<meta property="og:description" content="{{ product.description|striptags|truncate(160) }}">
+<meta property="og:image" content="{{ request.url_root[:-1] }}{{ url_for('static', filename=product.image) }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="AMEVIA">
+{% endblock %}
+
 {% block content %}
 <main class="flex-grow">
     <section class="py-12 md:py-20">
