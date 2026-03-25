@@ -20,70 +20,71 @@
                     Повернутися на головну
                 </a>
             </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
-                <!-- Product Image -->
-                <div class="relative w-full aspect-square overflow-hidden rounded-2xl bg-white/40 backdrop-blur-sm border border-white/60 shadow-lg">
-                    <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}" class="w-full h-full object-cover" referrerpolicy="no-referrer">
-                     {% if product.is_1_plus_1_equals_3 %}
-                        <span class="absolute top-4 left-4 bg-primary-lavender text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">1+1=3</span>
-                    {% elif product.sale %}
-                        <span class="absolute top-4 left-4 bg-accent-red text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">-{{ product.sale }}%</span>
-                    {% elif product.isNew %}
-                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-deep-indigo text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">New</span>
-                    {% endif %}
-                </div>
-
-                <!-- Product Details -->
-                <div class="flex flex-col h-full">
-                    <div class="mb-3">
-                        <span class="text-[10px] uppercase tracking-[0.2em] text-primary-lavender font-bold">{{ product.brand }}</span>
-                    </div>
-                    <h1 class="font-serif text-4xl md:text-5xl text-deep-indigo mb-4 leading-tight">{{ product.name }}</h1>
-                    
-                    <div class="flex items-center gap-4 mb-8">
-                        <span class="text-3xl font-bold text-deep-indigo">{{ product.price }} ₴</span>
-                        {% if product.sale and product.original_price %}
-                        <span class="text-lg text-gray-400 line-through font-light">{{ product.original_price }} ₴</span>
+            <div class="bg-white/40 backdrop-blur-sm rounded-2xl border border-white/60 shadow-lg p-12 md:p-16">
+                <div class="grid grid-cols-1 lg:grid-cols-2  gap-12 md:gap-16 items-start">
+                    <!-- Product Image -->
+                    <div class="relative w-full aspect-square overflow-hidden rounded-2xl bg-white/40 backdrop-blur-sm border border-white/60 shadow-lg">
+                        <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}" class="w-full h-full object-cover" referrerpolicy="no-referrer">
+                        {% if product.is_1_plus_1_equals_3 %}
+                            <span class="absolute top-4 left-4 bg-primary-lavender text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">1+1=3</span>
+                        {% elif product.sale %}
+                            <span class="absolute top-4 left-4 bg-accent-red text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">-{{ product.sale }}%</span>
+                        {% elif product.isNew %}
+                            <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-deep-indigo text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">New</span>
                         {% endif %}
                     </div>
 
-                    <!-- Accordion for details -->
-                    <div class="space-y-3 border-t border-white/60 pt-6">
-                        <div class="border-b border-white/60 pb-3">
-                            <h3 class="font-semibold text-deep-indigo">Опис</h3>
-                            <div class="pt-2 text-sm text-gray-500 font-light space-y-3">
-                                <p>{{ product.long_description }}</p>
+                    <!-- Product Details -->
+                    <div class="flex flex-col h-full">
+                        <div class="mb-3">
+                            <span class="text-[10px] uppercase tracking-[0.2em] text-primary-lavender font-bold">{{ product.brand }}</span>
+                        </div>
+                        <h1 class="font-serif text-4xl md:text-5xl text-deep-indigo mb-4 leading-tight">{{ product.name }}</h1>
+                        
+                        <div class="flex items-center gap-4 mb-8">
+                            <span class="text-3xl font-bold text-deep-indigo">{{ product.price }} ₴</span>
+                            {% if product.sale and product.original_price %}
+                            <span class="text-lg text-gray-400 line-through font-light">{{ product.original_price }} ₴</span>
+                            {% endif %}
+                        </div>
+
+                        <!-- Accordion for details -->
+                        <div class="space-y-3 border-t border-white/60 pt-6">
+                            <div class="border-b border-white/60 pb-3">
+                                <h3 class="font-semibold text-deep-indigo">Опис</h3>
+                                <div class="pt-2 text-sm text-gray-500 font-light space-y-3">
+                                    <p>{{ product.long_description }}</p>
+                                </div>
+                            </div>
+                            <div class="border-b border-white/60 pb-3">
+                                <h3 class="font-semibold text-deep-indigo">Характеристики</h3>
+                                <div class="pt-2 text-sm text-gray-500 font-light">
+                                    <ul class="space-y-2">
+                                        <li><strong>Аромат схожий на:</strong> {{ product.similar_to }}</li>
+                                        <li><strong>Класифікація:</strong> {{ product.classification }}</li>
+                                        <li><strong>Початкова нота:</strong> {{ product.top_notes }}</li>
+                                        <li><strong>Нота серця:</strong> {{ product.heart_notes }}</li>
+                                        <li><strong>Кінцева нота:</strong> {{ product.base_notes }}</li>
+                                        <li><strong>Стать:</strong> {{ product.gender }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-deep-indigo">Спосіб застосування</h3>
+                                <div class="pt-2 text-sm text-gray-500 font-light">
+                                    <p>{{ product.how_to_use }}</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="border-b border-white/60 pb-3">
-                            <h3 class="font-semibold text-deep-indigo">Характеристики</h3>
-                            <div class="pt-2 text-sm text-gray-500 font-light">
-                                <ul class="space-y-2">
-                                    <li><strong>Аромат схожий на:</strong> {{ product.similar_to }}</li>
-                                    <li><strong>Класифікація:</strong> {{ product.classification }}</li>
-                                    <li><strong>Початкова нота:</strong> {{ product.top_notes }}</li>
-                                    <li><strong>Нота серця:</strong> {{ product.heart_notes }}</li>
-                                    <li><strong>Кінцева нота:</strong> {{ product.base_notes }}</li>
-                                    <li><strong>Стать:</strong> {{ product.gender }}</li>
-                                </ul>
-                            </div>
+                        
+                        <div class="flex flex-row gap-3 mt-8">
+                            <button class="flex-grow py-3 px-6 bg-deep-indigo text-white rounded-full text-sm uppercase font-bold tracking-widest shadow-lg hover:bg-primary-lavender transition-colors active:scale-95">
+                                До кошика
+                            </button>
+                            <button class="flex-shrink-0 p-3 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:text-accent-red hover:bg-white shadow-sm border border-white/60">
+                                <i data-lucide="heart" class="w-6 h-6"></i>
+                            </button>
                         </div>
-                        <div>
-                            <h3 class="font-semibold text-deep-indigo">Спосіб застосування</h3>
-                            <div class="pt-2 text-sm text-gray-500 font-light">
-                                <p>{{ product.how_to_use }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex flex-row gap-3 mt-8">
-                        <button class="flex-grow py-3 px-6 bg-deep-indigo text-white rounded-full text-sm uppercase font-bold tracking-widest shadow-lg hover:bg-primary-lavender transition-colors active:scale-95">
-                            До кошика
-                        </button>
-                        <button class="flex-shrink-0 p-3 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:text-accent-red hover:bg-white shadow-sm border border-white/60">
-                            <i data-lucide="heart" class="w-6 h-6"></i>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -119,7 +120,7 @@
     </section>
 
     <!-- Similar Products Section -->
-    <section class="py-20 bg-white/30 backdrop-blur-sm border-t border-b border-white/20">
+    <section class="py-20  border-t border-b border-white/20">
         <div class="max-w-7xl mx-auto px-4">
             <h2 class="font-serif text-4xl font-bold text-deep-indigo text-center mb-12">Схожі товари</h2>
             <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
