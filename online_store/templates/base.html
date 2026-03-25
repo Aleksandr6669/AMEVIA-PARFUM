@@ -49,14 +49,20 @@
             scroll-padding-top: 5rem;
         }
         body {
-            background-image: url("{{ url_for('static', filename='backgraun.png') }}");
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+        }
+        .fixed-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url("{{ url_for('static', filename='backgraun.png') }}");
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
         }
         .watercolor-bg {
             position: fixed;
@@ -86,6 +92,7 @@
     hx-target="#main-content"
     hx-select="#main-content"
 >
+    <div class="fixed-background"></div>
     <div id="page-content" class="min-h-screen bg-transparent relative pb-20 md:pb-0 flex flex-col">
         <div class="watercolor-bg"></div>
 
