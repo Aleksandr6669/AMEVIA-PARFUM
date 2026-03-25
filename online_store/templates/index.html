@@ -56,7 +56,7 @@
 <!-- New Arrivals Section -->
 <section class="py-20">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between items-end mb-12">
+        <div class="flex justify-between items-baseline mb-12">
             <h2 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo text-left mb-0">Новинки</h2>
             <a href="#" class="text-xs uppercase tracking-widest text-gray-400 flex items-center gap-2 hover:text-deep-indigo transition-colors">
                 Всі новинки <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
@@ -115,12 +115,11 @@
 <!-- Sale Section -->
 <section class="py-20">
     <div class="max-w-7xl mx-auto px-4">
-        <div class="flex justify-between items-end mb-12">
-             <h2 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo text-left mb-0">Акційні товари</h2>
-            <div class="flex gap-4">
-                <button class="p-2 border border-gray-100 rounded-full hover:bg-gray-50"><i data-lucide="chevron-left" class="w-5 h-5"></i></button>
-                <button class="p-2 border border-gray-100 rounded-full hover:bg-gray-50"><i data-lucide="chevron-right" class="w-5 h-5"></i></button>
-            </div>
+        <div class="flex justify-between items-baseline mb-12">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo text-left mb-0">Акційні товари</h2>
+            <a href="#" class="text-xs uppercase tracking-widest text-gray-400 flex items-center gap-2 hover:text-deep-indigo transition-colors">
+                Всі акції <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
         </div>
         <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {% for p in sale_products %}
@@ -173,9 +172,14 @@
 </section>
 
 <!-- Customer Reviews Section -->
-<section class="py-20 px-4 bg-soft-bg/50">
+<section class="py-20 px-4">
     <div class="max-w-7xl mx-auto">
-        <h2 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo text-center mb-12">Відгуки покупців</h2>
+        <div class="flex justify-between items-baseline mb-12">
+            <h2 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo text-left mb-0">Відгуки покупців</h2>
+            <a href="#" class="text-xs uppercase tracking-widest text-gray-400 flex items-center gap-2 hover:text-deep-indigo transition-colors">
+                Всі відгуки<i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             {% for item in customer_reviews %}
             <div class=" flex-col bg-white/60 backdrop-blur-sm border border-white/60 rounded-2xl shadow-lg overflow-hidden md:flex md:items-stretch">
@@ -231,7 +235,7 @@
 <!-- News and Articles Section -->
 <section class="py-20 px-4">
     <div class="max-w-7xl mx-auto">
-        <div class="flex justify-between items-end mb-12">
+        <div class="flex justify-between items-baseline mb-12">
             <h2 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo">Новини і статті</h2>
             <a href="#" class="text-xs uppercase tracking-widest text-gray-400 flex items-center gap-2 hover:text-deep-indigo transition-colors">
                 Всі статті <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
