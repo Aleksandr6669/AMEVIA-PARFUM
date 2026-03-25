@@ -33,19 +33,25 @@
                         {% endif %}
                     </div>
 
-                    <!-- Remove from favorites button -->
-                    <button class="absolute top-3 right-3 p-2 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:text-accent-red hover:bg-white shadow-sm z-10 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
-                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
-                    </button>
+                    <!-- Action buttons -->
+                    <div class="absolute top-3 right-3 flex flex-col gap-2 z-10">
+                        <!-- Remove from favorites button -->
+                        <button class="p-2 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:text-accent-red hover:bg-white shadow-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                            <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                        </button>
+                        <a href="{{ p.url }}" class="p-2 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:bg-white hover:text-primary-lavender shadow-sm opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                            <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                        </a>
+                    </div>
 
-                    <div class="relative w-full aspect-square overflow-hidden">
+                    <a href="{{ p.url }}" class="relative w-full aspect-square overflow-hidden">
                         <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
                         <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 hidden md:block bg-gradient-to-t from-white/60 to-transparent backdrop-blur-[2px]">
                             <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg shadow-deep-indigo/20 hover:bg-primary-lavender transition-colors">До кошика</button>
                         </div>
-                    </div>
+                    </a>
                     <div class="p-4">
-                        <div class="text-center w-full">
+                        <a href="{{ p.url }}" class="text-center w-full">
                             <div class="text-[8px] uppercase tracking-[0.2em] text-primary-lavender font-bold mb-1">{{ p.brand }}</div>
                             <h3 class="font-serif text-base text-deep-indigo mb-1 line-clamp-1 group-hover:text-primary-lavender transition-colors">{{ p.name }}</h3>
                             <p class="text-[10px] text-gray-400 line-clamp-2 mb-2 font-light leading-tight h-6">{{ p.description }}</p>
@@ -55,7 +61,7 @@
                                 <span class="text-[10px] text-gray-400 line-through font-light">{{ p.original_price }} ₴</span>
                                 {% endif %}
                             </div>
-                        </div>
+                        </a>
                         <div class="mt-4 w-full md:hidden">
                             <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg active:scale-95 hover:bg-primary-lavender transition-colors">До кошика</button>
                         </div>

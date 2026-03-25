@@ -1,0 +1,167 @@
+{% extends base_template %}
+
+{% block content %}
+<main class="flex-grow">
+    <section class="py-12 md:py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <!-- Back to Home link -->
+            <div class="mb-8">
+                <a href="/" class="inline-flex items-center text-sm text-primary-lavender hover:text-deep-indigo transition-colors group">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1"></i>
+                    Повернутися до каталогу
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-start">
+                <!-- Product Image -->
+                <div class="relative w-full aspect-square overflow-hidden rounded-2xl bg-white/40 backdrop-blur-sm border border-white/60 shadow-lg">
+                    <img src="{{ url_for('static', filename=product.image) }}" alt="{{ product.name }}" class="w-full h-full object-cover" referrerpolicy="no-referrer">
+                     {% if product.is_1_plus_1_equals_3 %}
+                        <span class="absolute top-4 left-4 bg-primary-lavender text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">1+1=3</span>
+                    {% elif product.sale %}
+                        <span class="absolute top-4 left-4 bg-accent-red text-white text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">-{{ product.sale }}%</span>
+                    {% elif product.isNew %}
+                        <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-deep-indigo text-xs px-3 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">New</span>
+                    {% endif %}
+                </div>
+
+                <!-- Product Details -->
+                <div class="flex flex-col h-full">
+                    <div class="mb-3">
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-primary-lavender font-bold">{{ product.brand }}</span>
+                    </div>
+                    <h1 class="font-serif text-4xl md:text-5xl text-deep-indigo mb-4 leading-tight">{{ product.name }}</h1>
+                    
+                    <div class="flex items-center gap-4 mb-8">
+                        <span class="text-3xl font-bold text-deep-indigo">{{ product.price }} ₴</span>
+                        {% if product.sale and product.original_price %}
+                        <span class="text-lg text-gray-400 line-through font-light">{{ product.original_price }} ₴</span>
+                        {% endif %}
+                    </div>
+
+                    <!-- Accordion for details -->
+                    <div class="space-y-3 border-t border-white/60 pt-6">
+                        <div class="border-b border-white/60 pb-3">
+                            <h3 class="font-semibold text-deep-indigo">Опис</h3>
+                            <div class="pt-2 text-sm text-gray-500 font-light space-y-3">
+                                <p>{{ product.long_description }}</p>
+                            </div>
+                        </div>
+                        <div class="border-b border-white/60 pb-3">
+                            <h3 class="font-semibold text-deep-indigo">Характеристики</h3>
+                            <div class="pt-2 text-sm text-gray-500 font-light">
+                                <ul class="space-y-2">
+                                    <li><strong>Аромат схожий на:</strong> {{ product.similar_to }}</li>
+                                    <li><strong>Класифікація:</strong> {{ product.classification }}</li>
+                                    <li><strong>Початкова нота:</strong> {{ product.top_notes }}</li>
+                                    <li><strong>Нота серця:</strong> {{ product.heart_notes }}</li>
+                                    <li><strong>Кінцева нота:</strong> {{ product.base_notes }}</li>
+                                    <li><strong>Стать:</strong> {{ product.gender }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-deep-indigo">Спосіб застосування</h3>
+                            <div class="pt-2 text-sm text-gray-500 font-light">
+                                <p>{{ product.how_to_use }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 mt-10">
+                        <button class="flex-grow py-3 px-6 bg-deep-indigo text-white rounded-full text-sm uppercase font-bold tracking-widest shadow-lg hover:bg-primary-lavender transition-colors active:scale-95">
+                            До кошика
+                        </button>
+                        <button class="flex-shrink-0 p-3 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:text-accent-red hover:bg-white shadow-sm border border-white/60">
+                            <i data-lucide="heart" class="w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="mt-20">
+                <h2 class="font-serif text-3xl font-bold text-deep-indigo mb-8">Відгуки покупців</h2>
+                <div class="space-y-6">
+                    {% if product.reviews %}
+                        {% for review in product.reviews %}
+                        <div class="bg-white/40 backdrop-blur-sm p-6 rounded-lg border border-white/60">
+                            <div class="flex items-center mb-2">
+                                <h4 class="font-semibold text-deep-indigo mr-2">{{ review.author }}</h4>
+                                <div class="flex items-center">
+                                    {% for i in range(review.rating) %}
+                                    <i data-lucide="star" class="w-4 h-4 text-yellow-400 fill-current"></i>
+                                    {% endfor %}
+                                    {% for i in range(5 - review.rating) %}
+                                    <i data-lucide="star" class="w-4 h-4 text-gray-300"></i>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-600 font-light">{{ review.text }}</p>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-sm text-gray-500">На цей товар ще немає відгуків. Станьте першим!</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Similar Products Section -->
+    <section class="py-20 bg-white/30 backdrop-blur-sm border-t border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="font-serif text-4xl font-bold text-deep-indigo text-center mb-12">Схожі товари</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for p in similar_products %}
+                <div class="flex flex-col group cursor-pointer bg-white/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/60 shadow-sm hover:shadow-2xl hover:shadow-primary-lavender/20 transition-all duration-500 hover:-translate-y-2 hover:border-primary-lavender/10">
+                    <div class="relative w-full aspect-square overflow-hidden">
+                        <div class="absolute top-3 left-3 flex flex-col gap-2 z-10">
+                            {% if p.is_1_plus_1_equals_3 %}
+                                <span class="bg-primary-lavender text-white text-[8px] px-2 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">1+1=3</span>
+                            {% elif p.sale %}
+                                <span class="bg-accent-red text-white text-[8px] px-2 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">-{{ p.sale }}%</span>
+                            {% elif p.isNew %}
+                                 <span class="bg-white/90 backdrop-blur-sm text-deep-indigo text-[8px] px-2 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">New</span>
+                            {% endif %}
+                        </div>
+                        <div class="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                            <button class="p-2 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:bg-white hover:text-accent-red shadow-sm">
+                                <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+                            </button>
+                            <a href="{{ p.url }}" class="p-2 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:bg-white hover:text-primary-lavender shadow-sm">
+                                <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                            </a>
+                        </div>
+                        <a href="{{ p.url }}" class="w-full h-full">
+                            <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                        </a>
+                        <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 hidden md:block bg-gradient-to-t from-white/60 to-transparent backdrop-blur-[2px]">
+                            <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg shadow-deep-indigo/20 hover:bg-primary-lavender transition-colors">До кошика</button>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <a href="{{ p.url }}" class="text-center w-full">
+                            <div class="text-[8px] uppercase tracking-[0.2em] text-primary-lavender font-bold mb-1">{{ p.brand }}</div>
+                            <h3 class="font-serif text-base text-deep-indigo mb-1 line-clamp-1 group-hover:text-primary-lavender transition-colors">{{ p.name }}</h3>
+                            <p class="text-[10px] text-gray-400 line-clamp-2 mb-2 font-light leading-tight h-6">{{ p.description }}</p>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="text-sm font-bold text-deep-indigo">{{ p.price }} ₴</span>
+                                 {% if p.sale %}
+                                <span class="text-[10px] text-gray-300 line-through font-light">{{ p.original_price }} ₴</span>
+                                {% endif %}
+                            </div>
+                        </a>
+                        <div class="mt-4 w-full md:hidden">
+                            <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg active:scale-95 transition-transform hover:bg-primary-lavender transition-colors">До кошика</button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock %}
