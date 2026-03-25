@@ -1,0 +1,89 @@
+{% extends base_template %}
+
+{% block title %}Акції та знижки на парфумерію - AMEVIA{% endblock %}
+
+{% block open_graph %}
+<meta name="description" content="Найкращі пропозиції та знижки на нішеву парфумерію в інтернет-магазині AMEVIA. Встигніть придбати улюблені аромати за вигідною ціною.">
+<meta property="og:title" content="Акції та знижки - AMEVIA">
+<meta property="og:description" content="Найкращі пропозиції на нішеву парфумерію. Встигніть придбати улюблені аромати за вигідною ціною.">
+<meta property="og:image" content="{{ request.url_root[:-1] }}{{ url_for('static', filename='logo.png') }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:type" content="website">
+{% endblock %}
+
+{% block content %}
+<main class="flex-grow">
+    <section class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="mb-8">
+                <a href="/" class="inline-flex items-center text-sm text-primary-lavender hover:text-deep-indigo transition-colors group">
+                    <i data-lucide="arrow-left" class="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1"></i>
+                    Повернутися на головну
+                </a>
+            </div>
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h1 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo">Акційні товари</h1>
+                    <p class="text-primary-lavender mt-2">Найкращі пропозиції цього тижня</p>
+                </div>
+
+                {% if products %}
+                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {% for p in products %}
+                    <div class="flex flex-col group cursor-pointer bg-white/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/60 shadow-sm hover:shadow-2xl hover:shadow-primary-lavender/20 transition-all duration-500 hover:-translate-y-2 hover:border-primary-lavender/10">
+                        <div class="relative w-full aspect-square overflow-hidden">
+                            <div class="absolute top-3 left-3 flex flex-col gap-2 z-10">
+                                {% if p.is_1_plus_1_equals_3 %}
+                                    <span class="bg-primary-lavender text-white text-[8px] px-2 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">1+1=3</span>
+                                {% elif p.sale %}
+                                    <span class="bg-accent-red text-white text-[8px] px-2 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">-{{ p.sale }}%</span>
+                                {% elif p.isNew %}
+                                    <span class="bg-white/90 backdrop-blur-sm text-deep-indigo text-[8px] px-2 py-1 rounded-full uppercase font-bold tracking-widest shadow-sm">New</span>
+                                {% endif %}
+                            </div>
+                            <div class="absolute top-3 right-3 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                                <button class="p-2 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:bg-white hover:text-accent-red shadow-sm">
+                                    <i data-lucide="heart" class="w-3.5 h-3.5"></i>
+                                </button>
+                                <a href="{{ p.url }}" class="p-2 bg-white/80 backdrop-blur-sm rounded-full text-deep-indigo hover:bg-white hover:text-primary-lavender shadow-sm">
+                                    <i data-lucide="search" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                            <a href="{{ p.url }}" class="w-full h-full">
+                                <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110" referrerpolicy="no-referrer">
+                            </a>
+                            <div class="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-500 hidden md:block bg-gradient-to-t from-white/60 to-transparent backdrop-blur-[2px]">
+                                <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg shadow-deep-indigo/20 hover:bg-primary-lavender transition-colors">До кошика</button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <a href="{{ p.url }}" class="text-center w-full">
+                                <div class="text-[8px] uppercase tracking-[0.2em] text-primary-lavender font-bold mb-1">{{ p.brand }}</div>
+                                <h3 class="font-serif text-base text-deep-indigo mb-1 line-clamp-1 group-hover:text-primary-lavender transition-colors">{{ p.name }}</h3>
+                                <p class="text-[10px] text-gray-400 line-clamp-2 mb-2 font-light leading-tight h-6">{{ p.description }}</p>
+                                <div class="flex items-center justify-center gap-2">
+                                    <span class="text-sm font-bold text-deep-indigo">{{ p.price }} ₴</span>
+                                    {% if p.sale %}
+                                    <span class="text-[10px] text-gray-300 line-through font-light">{{ p.original_price }} ₴</span>
+                                    {% endif %}
+                                </div>
+                            </a>
+                            <div class="mt-4 w-full md:hidden">
+                                <button class="w-full py-2 bg-deep-indigo text-white rounded-full text-[9px] uppercase font-bold tracking-[0.2em] shadow-lg active:scale-95 transition-transform hover:bg-primary-lavender transition-colors">До кошика</button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                    <div class="text-center py-20">
+                        <i data-lucide="tag" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
+                        <h2 class="font-serif text-2xl text-deep-indigo mb-2">Зараз немає активних акцій</h2>
+                        <p class="text-gray-500">Будь ласка, завітайте пізніше, щоб побачити наші спеціальні пропозиції.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

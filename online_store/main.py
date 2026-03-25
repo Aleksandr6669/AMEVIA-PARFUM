@@ -74,6 +74,31 @@ def index():
         base_template=base_template
     )
 
+@app.route('/reviews')
+def reviews():
+    base_template = "_content_wrapper.html" if is_htmx_request() else "base.html"
+    all_reviews = []
+    # Process products to get correct URLs and prices if needed
+    processed_products = process_products_for_template(all_products)
+    for p in processed_products:
+        if p.get('reviews'):
+            for r in p['reviews']:
+                if r.get('text'):
+                    all_reviews.append({'review_details': r, 'product': p})
+    # Sort by author name just for some order, in a real app you'd use a date
+    all_reviews.sort(key=lambda x: x['review_details'].get('author', ''))
+    return render_template('reviews.html', reviews=all_reviews, base_template=base_template)
+
+@app.route('/promotions')
+def promotions():
+    base_template = "_content_wrapper.html" if is_htmx_request() else "base.html"
+    sale_products = [p for p in all_products if p.get('sale') or p.get('is_1_plus_1_equals_3')]
+    return render_template(
+        'promotions.html',
+        products=process_products_for_template(sale_products),
+        base_template=base_template
+    )
+
 @app.route('/favorites')
 def favorites():
     base_template = "_content_wrapper.html" if is_htmx_request() else "base.html"

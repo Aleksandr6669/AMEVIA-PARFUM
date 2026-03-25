@@ -4,7 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}AMEVIA - Інтернет-магазин нішевої парфумерії{% endblock %}</title>
-    {% block open_graph %}{% endblock %}
+    {% block meta_tags %}
+    <meta name="description" content="Відкрийте світ унікальних ароматів в AMEVIA. У нас ви знайдете нішеву парфумерію, ексклюзивні новинки, вигідні акції та відгуки покупців. Швидка доставка по Україні.">
+    {% endblock %}
+
+    {% block open_graph %}
+    <meta property="og:title" content="AMEVIA - Головна сторінка">
+    <meta property="og:description" content="Нішева парфумерія, ексклюзивні новинки та вигідні акції. Відкрийте світ унікальних ароматів в AMEVIA.">
+    <meta property="og:image" content="{{ request.url_root[:-1] }}{{ url_for('static', filename='logo.png') }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="AMEVIA">
+    {% endblock %}
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -106,8 +118,8 @@
                                 </div>
                             </div>
                             <a href="#" class="font-sans text-[11px] font-bold tracking-[0.2em] uppercase transition-all hover:text-primary-lavender text-deep-indigo">Оплата та доставка</a>
-                            <a href="#" class="font-sans text-[11px] font-bold tracking-[0.2em] uppercase transition-all hover:text-primary-lavender text-deep-indigo">Відгуки</a>
-                            <a href="#" class="font-sans text-[11px] font-bold tracking-[0.2em] uppercase transition-all hover:text-primary-lavender text-accent-red">Акції</a>
+                            <a href="/reviews" class="font-sans text-[11px] font-bold tracking-[0.2em] uppercase transition-all hover:text-primary-lavender text-deep-indigo">Відгуки</a>
+                            <a href="/promotions" class="font-sans text-[11px] font-bold tracking-[0.2em] uppercase transition-all hover:text-primary-lavender text-accent-red">Акції</a>
                         </nav>
                         <!-- Mobile Menu Button -->
                         <div class="md:hidden">
@@ -173,8 +185,8 @@
                             <li><a href="#" class="hover:text-deep-indigo block py-1">Міні сети</a></li>
                         </ul>
                         <a href="#" class="font-sans text-lg font-medium text-deep-indigo transition-colors hover:text-primary-lavender">Оплата та доставка</a>
-                        <a href="#" class="font-sans text-lg font-medium text-deep-indigo transition-colors hover:text-primary-lavender">Відгуки</a>
-                        <a href="#" class="font-sans text-lg font-medium text-accent-red transition-colors hover:text-primary-lavender">Акції</a>
+                        <a href="/reviews" class="font-sans text-lg font-medium text-deep-indigo transition-colors hover:text-primary-lavender">Відгуки</a>
+                        <a href="/promotions" class="font-sans text-lg font-medium text-accent-red transition-colors hover:text-primary-lavender">Акції</a>
                     </nav>
                     
                 </div>

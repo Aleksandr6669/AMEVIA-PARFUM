@@ -1,0 +1,55 @@
+{% extends base_template %}
+
+{% block title %}Відгуки клієнтів - AMEVIA{% endblock %}
+
+{% block open_graph %}
+<meta name="description" content="Читайте реальні відгуки наших покупців про нішеву парфумерію AMEVIA. Дізнайтеся, що кажуть клієнти про наші аромати та сервіс.">
+<meta property="og:title" content="Відгуки клієнтів - AMEVIA">
+<meta property="og:description" content="Читайте реальні відгуки наших покупців про нішеву парфумерію AMEVIA.">
+<meta property="og:image" content="{{ request.url_root[:-1] }}{{ url_for('static', filename='logo.png') }}">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:type" content="website">
+{% endblock %}
+
+{% block content %}
+<main class="flex-grow">
+    <section class="py-12 md:py-20 bg-soft-bg/50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h1 class="font-serif text-4xl md:text-5xl font-bold text-deep-indigo">Відгуки покупців</h1>
+                <p class="text-primary-lavender mt-2">Дякуємо, що ділитесь враженнями!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for item in reviews %}
+                <div class="bg-white/60 backdrop-blur-sm rounded-2xl shadow-lg p-6 flex flex-col h-full text-left border border-white/60">
+                    <h3 class="font-bold text-xl text-deep-indigo mb-2">{{ item.review_details.author }}</h3>
+                    <div class="flex items-center mb-4">
+                        {% if item.review_details.rating %}
+                            {% for i in range(item.review_details.rating) %}
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                            {% endfor %}
+                            {% for i in range(5 - item.review_details.rating) %}
+                            <i data-lucide="star" class="w-5 h-5 text-gray-300"></i>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                    <p class="text-gray-700 font-light text-sm mb-6 flex-grow">
+                        "{{ item.review_details.text }}"
+                    </p>
+                    {% with p=item.product %}
+                    <a href="{{ p.url }}" class="mt-auto bg-gray-100/50 rounded-lg p-3 flex items-center gap-4 hover:shadow-md transition-shadow">
+                        <img src="{{ url_for('static', filename=p.image) }}" alt="{{ p.name }}" class="w-16 h-16 object-cover rounded-md flex-shrink-0" referrerpolicy="no-referrer">
+                        <div>
+                           <span class="font-semibold text-deep-indigo text-sm leading-tight block">{{ p.name }}</span>
+                           <span class="text-xs text-primary-lavender">Переглянути товар</span>
+                        </div>
+                    </a>
+                    {% endwith %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
