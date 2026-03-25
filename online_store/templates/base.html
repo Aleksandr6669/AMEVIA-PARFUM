@@ -295,21 +295,35 @@
             const mobileMenuButton = target.closest('#mobile-menu-button');
             const mobileMenuOverlay = target.closest('#mobile-menu-overlay');
             const mobileMenuCloseButton = target.closest('#mobile-menu-close-button');
+            const navLink = target.closest('#mobile-menu-panel nav a'); // Check for nav link click
 
-            if (mobileMenuButton || mobileMenuOverlay || mobileMenuCloseButton) {
+            // Open with button, close with overlay, close button, or nav link
+            if (mobileMenuButton || mobileMenuOverlay || mobileMenuCloseButton || navLink) {
                 const mobileMenu = document.getElementById('mobile-menu');
                 if (!mobileMenu) return; // Exit if menu not on the page
 
-                const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+                const mobileMenuOverlayEl = document.getElementById('mobile-menu-overlay');
                 const mobileMenuPanel = document.getElementById('mobile-menu-panel');
-                const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
+                const mobileMenuCloseButtonEl = document.getElementById('mobile-menu-close-button');
                 
-                document.body.classList.toggle('overflow-hidden');
-                mobileMenu.classList.toggle('pointer-events-none');
-                mobileMenuOverlay.classList.toggle('opacity-0');
-                mobileMenuPanel.classList.toggle('-translate-x-full');
-                mobileMenuCloseButton.classList.toggle('opacity-0');
-                mobileMenuCloseButton.classList.toggle('-rotate-90');
+                const isMenuOpen = !mobileMenuPanel.classList.contains('-translate-x-full');
+
+                // Decide whether to open or close
+                if (mobileMenuButton && !isMenuOpen) {
+                    // Open menu
+                    document.body.classList.add('overflow-hidden');
+                    mobileMenu.classList.remove('pointer-events-none');
+                    mobileMenuOverlayEl.classList.remove('opacity-0');
+                    mobileMenuPanel.classList.remove('-translate-x-full');
+                    mobileMenuCloseButtonEl.classList.remove('opacity-0', '-rotate-90');
+                } else if (isMenuOpen) {
+                    // Close menu (if triggered by overlay, close button, or navLink)
+                    document.body.classList.remove('overflow-hidden');
+                    mobileMenu.classList.add('pointer-events-none');
+                    mobileMenuOverlayEl.classList.add('opacity-0');
+                    mobileMenuPanel.classList.add('-translate-x-full');
+                    mobileMenuCloseButtonEl.classList.add('opacity-0', '-rotate-90');
+                }
             }
         });
     </script>
